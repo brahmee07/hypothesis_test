@@ -1,141 +1,149 @@
-### Footedness & Finishing Efficiency in Football (2014–2020)
+# **Footedness & Finishing Efficiency in Football (2014–2020)**  
+### *Do left-footed players really finish better?*
 
-Research Question
+---
 
-Do left-footed football players finish better than right-footed players?
+## **1. Research Question**
+As a football fanatic, I’ve always heard people say:
 
-As a football fanatic, I’ve always heard people say that “left-footed players have naturally better finishing ability.”
-This project uses six seasons of real shot-level data from Europe’s top leagues to test whether that belief is actually true.
+> **“Left-footed players have naturally better finishing ability.”**
 
-Hypothesis
-Null Hypothesis (H₀):
+This project uses six seasons of shot-level data from Europe’s top leagues (2014–2020) to test whether left-footed players actually finish better than right-footed players once we account for shot quality (xG).
 
-There is no difference in finishing efficiency between left-footed and right-footed players.
+---
 
-Alternative Hypothesis (H₁):
+## **2. Hypothesis**
 
-Left-footed players have higher finishing efficiency than right-footed players.
+### **Null Hypothesis (H₀)**  
+There is **no difference** in finishing efficiency between left-footed and right-footed players.
+
+### **Alternative Hypothesis (H₁)**  
+**Left-footed players have higher finishing efficiency** than right-footed players.
 
 Finishing efficiency is defined as:
 
-efficiency
-=
-Goals Scored
-−
-Expected Goals (xG)
-efficiency=Goals Scored−Expected Goals (xG)
+\[
+\text{efficiency} = \text{Goal (1/0)} - \text{xG}
+\]
 
-Data Description
-Datasets Used
-1. Football Database (Kaggle — 2014 to 2020)
+---
 
-A relational football dataset covering the Top 5 European leagues. Includes match events, shot-level xG, shot type, and player IDs.
-Unit of analysis: individual shots.
+## **3. Data Description**
 
-2. Football Players Data (SoFIFA, 2023)
+### **Datasets Used**
 
-A dataset of 17,000+ players scraped from SoFIFA.com.
-Includes preferred foot, weak-foot rating, nationality, and full player names.
+#### **1. Football Database (Kaggle, 2014–2020)**
+A relational dataset covering the top 5 European leagues.  
+Includes:
+- Shot-level data  
+- Expected goals (xG)  
+- Shot type (RightFoot, LeftFoot, Head, etc.)  
+- Shot situation (OpenPlay, SetPiece, Corner, etc.)  
+- Player IDs  
+- ~1800 matches per season  
 
-Why Two Datasets?
+**Unit of analysis:** individual shots.
 
-The Football Database has shot-level data, but no preferred foot.
+---
 
-The FIFA dataset has preferred foot, but different names, and not all players overlap.
+#### **2. Football Players Data (SoFIFA, 2023)**
+17,000+ players scraped from SoFIFA.com.  
+Includes:
+- Full names  
+- Preferred foot  
+- Weak-foot rating  
+- Club/nationality  
+- Positions & ratings  
 
-Merging the Data
+**Reason for this dataset:**  
+The Football Database *does not* include preferred foot, so this dataset fills that gap.
 
-To link the two datasets:
+**Limitation:**  
+Some older players (2014–2020) do not appear in FIFA 2023 → unmatched players removed.
 
-Cleaned and normalized names (lowercasing, removing accents with unidecode).
+---
 
-Used exact match → substring match → fuzzy matching (fuzzywuzzy) to match players.
+## **4. Merging the Data**
 
-Some players were unmatched (expected, since SoFIFA is from 2023 while shot data is 2014–2020).
+To merge the two datasets:
 
-Final Working Dataset
+### **Name Cleaning**
+- Lowercased names  
+- Removed accents using `unidecode`  
+- Created clean comparison keys  
 
-After merging, I created a clean dataset containing:
+### **Three-Stage Matching**
+1. **Exact match**  
+2. **Substring match**  
+3. **Fuzzy match** (using `fuzzywuzzy` token sort ratio)
 
-name
+Players with no reliable match were excluded.
 
-preferred_foot
+### **Final Working Dataset Columns**
+- `name`  
+- `preferred_foot`  
+- `situation`  
+- `shotType` (LeftFoot, RightFoot only)  
+- `shotResult`  
+- `xGoal`
 
-situation
+---
 
-shotType (RightFoot / LeftFoot only)
+## **5. Data Filtering**
 
-shotResult
+To isolate true finishing ability:
 
-xGoal
+### ✔ Open-play shots only  
+(set pieces and penalties removed)
 
+### ✔ Footed shots only  
+- LeftFoot  
+- RightFoot  
+(headers and other body parts removed)
 
-Methods
-Efficiency Metric
+### ✔ Valid outcomes only  
+Removed:
+- OwnGoal  
+- ShotOnPost  
 
-For each shot:
+### ✔ Minimum sample size  
+Only players with **10+ shots** included.
 
-efficiency
-=
-Goal (1/0)
-−
-xG
-efficiency=Goal (1/0)−xG
-Player-Level Aggregation
+---
 
+## **6. Methods**
+
+### **Shot-Level Efficiency**
+\[
+\text{efficiency} = \text{Goal} - \text{xG}
+\]
+
+- Positive → finished better than expected  
+- Negative → underperformed xG  
+
+### **Player-Level Aggregation**
 For each player:
+- total shots  
+- total goals  
+- total xG  
+- total efficiency  
+- **average efficiency** (our main metric)
 
-total shots
+---
 
-total goals
+## **7. Test Statistic (Plain Language)**
 
-total xG
+We compare:
 
-total efficiency
+> **Difference in average finishing efficiency  
+(left-footed mean − right-footed mean)**
 
-average efficiency
+This is the statistic we shuffle in the permutation test.
 
-Then restricted the dataset to:
+---
 
-Open play shots only
+## **8. Permutation Test**
 
-Footed shots only (LeftFoot, RightFoot)
+### **Observed Difference**
+Using ~750 matched players:
 
-No own goals or shots hitting the post
-
-Players with at least 10 total shots (ensures reliability)
-
-Methods
-Efficiency Metric
-
-For each shot:
-
-efficiency
-=
-Goal (1/0)
-−
-xG
-efficiency=Goal (1/0)−xG
-Player-Level Aggregation
-
-For each player:
-
-total shots
-
-total goals
-
-total xG
-
-total efficiency
-
-average efficiency
-
-Then restricted the dataset to:
-
-Open play shots only
-
-Footed shots only (LeftFoot, RightFoot)
-
-No own goals or shots hitting the post
-
-Players with at least 10 total shots (ensures reliability)
