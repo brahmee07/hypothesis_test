@@ -3,12 +3,10 @@
 
 ---
 
-## **1. Research Question**
-As a football fanatic, I’ve always heard people say:
+## **Research Question**
+Do left-footed players have better finishing ability than right-footed players?
 
-> **“Left-footed players have naturally better finishing ability.”**
-
-This project uses six seasons of shot-level data from Europe’s top leagues (2014–2020) to test whether left-footed players actually finish better than right-footed players once we account for shot quality (xG).
+There has always been debate about whether left-footed players have a natural advantage in finishing compared to right-footed players. As someone who has played football for many years and followed the sport closely, I’ve often felt that left-footed players tend to be more clinical. This project aims to test that belief using real shot-level data, rather than opinions or appearances, to see whether one group truly finishes better.
 
 ---
 
