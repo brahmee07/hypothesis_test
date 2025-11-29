@@ -8,19 +8,13 @@ There has always been debate about whether left-footed players have a natural ad
 
 ---
 
-## **2. Hypothesis**
+## **Hypothesis**
 
-### **Null Hypothesis (H₀)**  
+### **Null Hypothesis (H₀)**
 There is **no difference** in finishing efficiency between left-footed and right-footed players.
 
-### **Alternative Hypothesis (H₁)**  
-**Left-footed players have higher finishing efficiency** than right-footed players.
-
-Finishing efficiency is defined as:
-
-\[
-\text{efficiency} = \text{Goal (1/0)} - \text{xG}
-\]
+### **Alternative Hypothesis (H₁)**
+Left-footed players have **higher finishing efficiency** than right-footed players.
 
 ---
 
