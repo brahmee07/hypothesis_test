@@ -1,4 +1,4 @@
-# **Footedness & Finishing Efficiency in Football (2014–2020)**  
+# **Footedness & Finishing Efficiency in Football**  
 ---
 
 ## **Research Question**
