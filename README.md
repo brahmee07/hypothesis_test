@@ -1,6 +1,4 @@
 # **Footedness & Finishing Efficiency in Football (2014–2020)**  
-### *Do left-footed players really finish better?*
-
 ---
 
 ## **Research Question**
