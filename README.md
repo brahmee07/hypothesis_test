@@ -63,29 +63,43 @@ Some older players (2014–2020) do not appear in FIFA 2023 → unmatched player
 
 ---
 
-## **4. Merging the Data**
+## **🔧 Data Preparation Note**
 
-To merge the two datasets:
+All data cleaning, merging, and player–footedness matching were completed in a
+separate preprocessing notebook, which is **not included in this repository**
+to keep the project clean and focused on the statistical analysis.
 
-### **Name Cleaning**
-- Lowercased names  
-- Removed accents using `unidecode`  
-- Created clean comparison keys  
+The preprocessing steps included:
+- Loading the Football Database (2014–2020) shot-level data  
+- Loading the FIFA Player dataset (preferred foot)
+- Cleaning and normalizing player names (lowercasing, removing accents)
+- Applying exact match → substring match → fuzzy string matching
+- Removing unmatched or ambiguous players
+- Selecting only relevant shot information (Open Play, LeftFoot/RightFoot)
+- Constructing the final analysis dataset: `player_shot.csv`
 
-### **Three-Stage Matching**
-1. **Exact match**  
-2. **Substring match**  
-3. **Fuzzy match** (using `fuzzywuzzy` token sort ratio)
+The final cleaned dataset is provided directly in this repository so that the
+results can be fully reproduced **without requiring the preprocessing code**.
 
-Players with no reliable match were excluded.
+---
 
-### **Final Working Dataset Columns**
-- `name`  
-- `preferred_foot`  
-- `situation`  
-- `shotType` (LeftFoot, RightFoot only)  
-- `shotResult`  
-- `xGoal`
+## **4. Methods**
+
+### **Shot-Level Efficiency**
+\[
+\text{efficiency} = \text{Goal} - \text{xG}
+\]
+
+- Positive → finished better than expected  
+- Negative → underperformed xG  
+
+### **Player-Level Aggregation**
+For each player:
+- total shots  
+- total goals  
+- total xG  
+- total efficiency  
+- average efficiency  
 
 ---
 
@@ -111,39 +125,31 @@ Only players with **10+ shots** included.
 
 ---
 
-## **6. Methods**
+## **6. Test Statistic (Plain Language)**
 
-### **Shot-Level Efficiency**
-\[
-\text{efficiency} = \text{Goal} - \text{xG}
-\]
-
-- Positive → finished better than expected  
-- Negative → underperformed xG  
-
-### **Player-Level Aggregation**
-For each player:
-- total shots  
-- total goals  
-- total xG  
-- total efficiency  
-- **average efficiency** (our main metric)
-
----
-
-## **7. Test Statistic (Plain Language)**
-
-We compare:
+To compare finishing ability between groups, I used:
 
 > **Difference in average finishing efficiency  
 (left-footed mean − right-footed mean)**
 
-This is the statistic we shuffle in the permutation test.
+If positive → left-footers finish better.  
+If negative → right-footers finish better.  
+If near zero → no real difference.
+
+This is the statistic used in the permutation test.
 
 ---
 
-## **8. Permutation Test**
+## **7. Permutation Test**
 
 ### **Observed Difference**
 Using ~750 matched players:
 
+
+### **Permutation Procedure**
+- Combine both groups  
+- Shuffle player labels 10,000 times  
+- Recompute the difference each time  
+- p-value = proportion of shuffled diffs ≥ observed diff  
+
+### **Permutation Result**
