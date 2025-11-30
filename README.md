@@ -225,7 +225,7 @@ Interpretation:
 - Bootstrapping was especially helpful here because:
   - the efficiency values are not normally distributed,
   - some players have only a small number of shots,
-  - and some players have very high or very low efficiency values.
+  - some players have very high or very low efficiency values.
   
 Bootstrapping gives a more reliable picture of uncertainty in situations like this where normal theory does not work well.
 
