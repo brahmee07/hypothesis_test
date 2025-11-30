@@ -206,30 +206,34 @@ Interpretation:
 
 ## **Uncertainty Estimation**
 
-To quantify uncertainty in my results, I used **resampling-based methods** from class: permutation tests and bootstrapping.
+To understand how stable my results are, I used two resampling methods that we learned in class: a permutation test and bootstrapping.
 
-### **Permutation Test**  
-- **Number of permutations:** 10,000  
-- The permutation distribution was centered around **0**, as expected under the null hypothesis that footedness does not matter.
-- The observed difference (0.0033) was located slightly in the right tail of this distribution, but not far enough to be considered rare.
-- This reinforces that the observed difference is small and only marginally surprising under the null model.
+### **Permutation Test**
+- I ran 10,000 permutations.
+- The permutation distribution was centered around 0, which makes sense if footedness does not matter.
+- The observed difference of 0.0033 was slightly toward the right side of the distribution, but not far enough to be considered unusual.
+- This means the observed advantage for left footed players is small and not very surprising if there is actually no real difference.
+
+**### **P Value Interpretation**
+The permutation test produced a p value of **0.0650**. This means that about six out of one hundred random shuffles created a difference as large as or larger than the one we observed. Since this value is slightly above the common 0.05 cutoff, the result is not considered statistically significant. In simple terms, the data shows a small advantage for left footed players, but the evidence is not strong enough to confidently say it is real rather than due to chance.
+**
 
 ### **Bootstrap Confidence Interval**
-- **Number of bootstrap samples:** 10,000  
-- The bootstrap distribution of the mean difference between left-footed and right-footed players was roughly symmetrical but showed noticeable spread.
-- The **95% bootstrap confidence interval** was:
-  
- $$\textbf{(-0.0009, 0.0076)}$$
- 
-### **Interpretation**
-- Because the interval includes **0**, we cannot confidently conclude that left-footed players are strictly better finishers.
-- However, the interval leans slightly positive, meaning **the data is consistent with a small left-foot advantage**, even if the evidence is not statistically strong.
-- Importantly, bootstrapping does not rely on the Central Limit Theorem—especially useful here because:
-  - efficiency values are not normally distributed,
-  - Some players have very few shots,
-  - Efficiency includes extreme outliers (big xG overperformance or underperformance).
+- I created 10,000 bootstrap samples.
+- The bootstrap distribution of the difference between the two groups was fairly smooth and spread out.
+- The 95 percent bootstrap confidence interval was:
 
-Bootstrapping gives a robust sense of uncertainty when theoretical approximations fail.
+  **(-0.0009, 0.0076)**
+
+### **Interpretation**
+- Since the interval contains 0, we cannot say with confidence that left footed players finish better.
+- The interval is slightly more positive than negative, so the data does allow for the possibility of a small left footed advantage, but it is not strong evidence.
+- Bootstrapping was especially helpful here because:
+  - the efficiency values are not normally distributed,
+  - some players have only a small number of shots,
+  - and some players have very high or very low efficiency values.
+  
+Bootstrapping gives a more reliable picture of uncertainty in situations like this where normal theory does not work well.
 
 ---
 ##  **Limitations**
