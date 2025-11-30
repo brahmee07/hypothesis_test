@@ -3,6 +3,7 @@
 ## **Research Question**
 
 Do left-footed players have better finishing ability than right-footed players?
+
 There has always been debate about whether left-footed players have a natural advantage in finishing compared to right-footed players. As someone who has played football for many years and followed the sport closely, I’ve often felt that left-footed players tend to be more clinical. This project aims to test that belief using real shot-level data rather than opinions or appearances to determine whether one group truly finishes better. The answer will help teams make better decisions when signing new players and planning their game tactics.
 
 ---
