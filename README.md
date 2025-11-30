@@ -99,16 +99,66 @@ Each row represents **one footed shot** by a player, with preferred foot attache
 
 ## **Filtering Steps**
 
-To ensure fairness and reduce noise:
+To ensure the analysis focuses on meaningful, comparable finishing behavior, I applied several filtering steps:
 
-- **Kept only footed shots:**  
-  - `LeftFoot`, `RightFoot`
-- **Kept only open-play shots:**  
-  - `df = df[df['situation'] == 'OpenPlay']`
-- **Removed outcomes not relevant to finishing:**  
-  - Dropped `OwnGoal` and `ShotOnPost`
-- **Computed shot-level efficiency:**  
-  - `efficiency = goal - xGoal`
+### **1. Footed Shots Only**
+Kept only shots taken with a clear foot:
+- `LeftFoot`
+- `RightFoot`
+
+Removed:
+- `Head`
+- `OtherBodyPart`
+
+This isolates **true finishing ability with the preferred or non-preferred foot**.
+
+---
+
+### **2. Open-Play Shots Only**
+Kept only:
+- `situation == 'OpenPlay'`
+
+Reason:  
+Set pieces, penalties, and direct free kicks involve different mechanics and do not reflect natural finishing ability in open play.
+
+---
+
+### **3. Remove Irrelevant Shot Outcomes**
+Excluded:
+- `OwnGoal`
+- `ShotOnPost`
+
+Reason:  
+These do not represent normal finishing outcomes for a player.
+
+---
+
+### **4. Keep Only Players With Sufficient Sample Size**
+After computing total shots per player, I kept **only players who took at least 10 shots** across the 2014–2020 period.
+
+Reason:
+- Players with very few shots have noisy efficiency values.
+- A minimum of *n = 10* ensures more stable estimates of finishing behavior.
+
+---
+
+### **5. Efficiency Metric**
+For each shot:
+
+\[
+\text{efficiency} = \text{Goal (1/0)} - \text{xG}
+\]
+
+Then aggregated at the player level to compute:
+- total shots  
+- total goals  
+- total xG  
+- total efficiency  
+- **average efficiency**
+
+---
+
+Let me know if you want the entire README reassembled cleanly with all sections in place.
 
 ---
 
