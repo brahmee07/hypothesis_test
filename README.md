@@ -190,7 +190,7 @@ This measures whether left-footed players exceed their expected goals by more th
 
 ---
 
-### **Permutation Test (Randomization Test)**
+### **Permutation Test**
 
 To test the null hypothesis (*no difference between groups*), I simulated datasets under the assumption that footedness has no effect.
 
