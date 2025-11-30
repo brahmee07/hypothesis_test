@@ -241,7 +241,7 @@ Despite careful processing, this project has several important limitations:
 - ~3 K players were unmatched and removed from the analysis.
 ---
 
-## **8. References**
+## ** References**
 
 ### **Datasets**
 - **Football Database (2014–2020)**  
