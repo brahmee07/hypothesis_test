@@ -16,139 +16,96 @@ Left-footed players have **higher finishing efficiency** than right-footed playe
 
 ---
 
-## **Data Description**
+## Data Description
 
-Data Sources
-This project uses two external datasets, which were merged and transformed:
+### Data Sources
 
-Football Database (2014–2020)
+This project uses two external datasets that were merged to create the final analysis-ready dataset.
 
-Source: Kaggle (technika148/football-database)
+#### 1. Football Database (2014–2020)
+**Source:** https://www.kaggle.com/datasets/technika148/football-database  
+Used for:
+- Shot-level data (`shots.csv`)
+- Variables such as `shotType`, `shotResult`, `xGoal`, `situation`
+- Player IDs and match information
 
-Content Used: Detailed event-level data, including the shots.csv and players.csv files, covering the Top 5 European Leagues from 2014 to 2020. This provided the shot-level metrics (Actual Goal, xG, Shot Type).
+#### 2. Football Players Data (SoFIFA, 2023)
+**Source:** https://www.kaggle.com/datasets/maso0dahmed/football-players-data  
+Used for:
+- `full_name`
+- `preferred_foot`
 
-Football Players Data (SoFIFA, 2023)
-
-Source: Kaggle (maso0dahmed/football-players-data)
-
-Content Used: A large collection of FIFA player profiles used solely to extract the preferred foot (Left or Right) for each player.
----
-Unit of Analysis and Observations
-
-The final statistical analysis of the Unit of Analysis and Observations is conducted on an aggregated dataset. Final Unit of Analysis: The Individual Player.Rationale: The hypothesis compares the average finishing efficiency score ($\text{avg\_efficiency}$) between the group of left-footed players and the group of right-footed players.Number of Observations ($N$): 2,073 unique players.Rationale: This is the final count of players who met all reliability filters.
-
-## **Merging the Two Datasets**
-
-The Football Database does not include preferred foot, so I performed the following steps:
-
-### **Name Cleaning**
-- Lowercased all names  
-- Removed accents using `unidecode`  
-- Removed punctuation  
-- Created “clean” name columns
-
-### **Matching Logic**
-Used a three-stage matching pipeline:
-1. **Exact match**  
-2. **Substring match**  
-3. **Fuzzy match** (fuzzywuzzy, token_sort_ratio)
-
-Players not matched in any step (~3,200 players) were dropped because their preferred foot was unavailable.
+This dataset provides preferred-foot information that the Football Database does not include.
 
 ---
 
-## **Final Shot-Level Dataset**
+## Unit of Analysis and Observations
 
-After merging and cleaning:
+- **Unit of Analysis:** Individual player (after aggregating shots)
+- **Initial dataset size after merging:** 3,234 players (shape: 3234 × 7)
+- **Final dataset size after filtering:** 2,073 players (shape: 2073 × 7)
 
-### **Unit of analysis:**  
-Each row represents **one footed shot** by a player, with preferred foot attached.
-
-### **Variables:**
-| Variable | Description |
-|---------|-------------|
-| `name` | Player name |
-| `preferred_foot` | Left or Right |
-| `situation` | Shot situation (OpenPlay, SetPiece, DirectFreekick, etc.) |
-| `shotType` | LeftFoot / RightFoot (others removed) |
-| `shotResult` | Goal, SavedShot, BlockedShot, MissedShots |
-| `xGoal` | Expected goal value of the shot |
+The final 2,073 players are those who:
+- Had a valid preferred foot  
+- Took at least 10 qualifying shots  
+- Had only open-play, footed (left or right) shots in the dataset  
 
 ---
 
-## **Filtering Steps**
+## Data Filtering and Transformation
 
-To ensure the analysis focuses on meaningful, comparable finishing behavior, I applied several filtering steps:
+### 1. Merging and Cleaning
+- Cleaned names (lowercased and removed accents using `unidecode`)
+- Matched players via:
+  - Exact match  
+  - Substring match  
+  - Fuzzy match (`fuzzywuzzy`)
 
-### **1. Footed Shots Only**
-Kept only shots taken with a clear foot:
-- `LeftFoot`
-- `RightFoot`
-
-Removed:
-- `Head`
-- `OtherBodyPart`
-
-This isolates **true finishing ability with the preferred or non-preferred foot**.
+**Result:**  
+After merging and removing unmatched entries, the working dataset contained 3,234 players with the following columns:  
+`name`, `preferred_foot`, `situation`, `shotType`, `shotResult`, `xGoal`, `playerID`.
 
 ---
 
-### **2. Open-Play Shots Only**
-Kept only:
-- `situation == 'OpenPlay'`
+### 2. Shot-Level Filtering
+To ensure a fair comparison of finishing ability, the following filters were applied:
 
-Reason:  
-Set pieces, penalties, and direct free kicks involve different mechanics and do not reflect natural finishing ability in open play.
+**Kept:**
+- Footed shots (`LeftFoot`, `RightFoot`)
+- Open-play shots (`situation == 'OpenPlay'`)
 
----
-
-### **3. Remove Irrelevant Shot Outcomes**
-Excluded:
-- `OwnGoal`
-- `ShotOnPost`
-
-Reason:  
-These do not represent normal finishing outcomes for a player.
+**Removed:**
+- Headers and other body-part shots  
+- Penalties, direct free kicks, and corners  
+- Own goals  
+- Shots that hit the post  
 
 ---
 
-### **4. Keep Only Players With Sufficient Sample Size**
-After computing total shots per player, I kept **only players who took at least 10 shots** across the 2014–2020 period.
-
-Reason:
-- Players with very few shots have noisy efficiency values.
-- A minimum of *n = 10* ensures more stable estimates of finishing behavior.
+### 3. Minimum Sample Size Requirement
+- Only players with **10 or more** qualifying shots were retained.
+- This reduced the dataset from 3,234 players to 2,073 players.
 
 ---
 
-### **5. Efficiency Metric**
-For each shot:
+### 4. Efficiency Metric and Aggregation
 
-$$\text{efficiency} = \text{Goal (1/0)} - \text{xG}$$
+Shot-level efficiency was defined as:
 
-Then aggregated at the player level to compute:
-- total shots  
-- total goals  
-- total xG  
-- total efficiency  
-- **average efficiency**
+efficiency = Goal(1 or 0) - xG
 
 
----
+This was aggregated to the player level:
 
-## **Player-Level Dataset (Aggregated)**
+- total_shots  
+- total_goals  
+- total_xg  
+- total_efficiency  
+- avg_efficiency  
 
-To analyze finishing ability, I aggregated the shot-level data:
+`avg_efficiency` is the final statistic used to compare left-footed vs right-footed players.
 
-```python
-player_efficiency = df.groupby(['name', 'preferred_foot']).agg(
-    total_shots=('goal', 'count'),
-    total_goals=('goal', 'sum'),
-    total_xg=('xGoal', 'sum'),
-    total_efficiency=('efficiency', 'sum'),
-    avg_efficiency=('efficiency', 'mean')
-).reset_index()
-```
+
 ## **Methods**
 
 ### **Test Statistic**
