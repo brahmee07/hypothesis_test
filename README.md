@@ -199,7 +199,7 @@ $$\textbf{(-0.0009, 0.0076)}$$
 
 Interpretation:
 - The interval is wide and crosses zero.
-- This means the true difference **could be slightly negative or moderately positive**.
+- This means the true difference could be slightly negative or moderately positive.
 - The data is compatible with left-footed players having a small advantage, but not definitively.
 
 ---
@@ -214,9 +214,6 @@ To understand how stable my results are, I used two resampling methods that we l
 - The observed difference of 0.0033 was slightly toward the right side of the distribution, but not far enough to be considered unusual.
 - This means the observed advantage for left footed players is small and not very surprising if there is actually no real difference.
 
-**### **P Value Interpretation**
-The permutation test produced a p value of **0.0650**. This means that about six out of one hundred random shuffles created a difference as large as or larger than the one we observed. Since this value is slightly above the common 0.05 cutoff, the result is not considered statistically significant. In simple terms, the data shows a small advantage for left footed players, but the evidence is not strong enough to confidently say it is real rather than due to chance.
-**
 
 ### **Bootstrap Confidence Interval**
 - I created 10,000 bootstrap samples.
