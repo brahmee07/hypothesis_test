@@ -171,7 +171,7 @@ player_efficiency = df.groupby(['name', 'preferred_foot']).agg(
     total_efficiency=('efficiency', 'sum'),
     avg_efficiency=('efficiency', 'mean')
 ).reset_index()
-
+```
 ## **Methods**
 
 ### **Test Statistic**
