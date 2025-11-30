@@ -144,9 +144,7 @@ Reason:
 ### **5. Efficiency Metric**
 For each shot:
 
-\[
-\text{efficiency} = \text{Goal (1/0)} - \text{xG}
-\]
+$$\text{efficiency} = \text{Goal (1/0)} - \text{xG}$$
 
 Then aggregated at the player level to compute:
 - total shots  
@@ -176,17 +174,8 @@ player_efficiency = df.groupby(['name', 'preferred_foot']).agg(
 ### **Test Statistic**
 To compare finishing ability between left-footed and right-footed players, I used:
 
-\[
-\textbf{Test Statistic} = \bar{E}_{\text{Left}} - \bar{E}_{\text{Right}}
-\]
+$$\textbf{Test Statistic} = \text{Mean Efficiency}_{\text{Left}} - \text{Mean Efficiency}_{\text{Right}}$$
 
-where:
-
-\[
-E = \text{average finishing efficiency} = \text{mean}( \text{Goal} - \text{xG} )
-\]
-
-This measures whether left-footed players exceed their expected goals by more than right-footed players.
 
 ---
 
@@ -247,9 +236,7 @@ Left-footed players showed slightly higher efficiency on average.
 
 I compared groups using:
 
-\[
-\text{Difference} = \bar{E}_{\text{Left}} - \bar{E}_{\text{Right}}
-\]
+$$\textbf{Test Statistic} = \text{Mean Efficiency}_{\text{Left}} - \text{Mean Efficiency}_{\text{Right}}$$
 
 **Observed difference:**  
 \[
@@ -280,9 +267,8 @@ Interpretation:
 Using **10,000 bootstrap resamples**, I estimated uncertainty around the difference in finishing efficiency.
 
 **95% Bootstrap Confidence Interval:**  
-\[
-\textbf{(-0.0009,\ 0.0076)}
-\]
+
+$$\textbf{(-0.0009, 0.0076)}$$
 
 Interpretation:
 - The interval is wide and crosses zero.
@@ -319,10 +305,8 @@ To quantify uncertainty in my results, I used **resampling-based methods** from 
 - The bootstrap distribution of the mean difference between left-footed and right-footed players was roughly symmetrical but showed noticeable spread.
 - The **95% bootstrap confidence interval** was:
   
-  \[
-  (-0.0009,\ 0.0076)
-  \]
-
+ $$\textbf{(-0.0009, 0.0076)}$$
+ 
 ### **Interpretation**
 - Because the interval includes **0**, we cannot confidently conclude that left-footed players are strictly better finishers.
 - However, the interval leans slightly positive, meaning **the data is consistent with a small left-foot advantage**, even if the evidence is not statistically strong.
