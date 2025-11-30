@@ -3,10 +3,8 @@
 ## **Research Question**
 Do left-footed players have better finishing ability than right-footed players?
 
-There has always been debate about whether left-footed players have a natural advantage in finishing compared to right-footed players. As someone who has played football for many years and followed the sport closely, I’ve often felt that left-footed players tend to be more clinical. This project aims to test that belief using real shot-level data, rather than opinions or appearances, to see whether one group truly finishes better.
-
+There has always been debate about whether left-footed players have a natural advantage in finishing compared to right-footed players. As someone who has played football for many years and followed the sport closely, I’ve often felt that left-footed players tend to be more clinical. This project aims to test that belief using real shot-level data, rather than opinions or appearances, to see whether one group truly finishes better. The answer will help teams make better decisions when signing new players and planning their game tactics.
 ---
-
 ## **Hypothesis**
 
 ### **Null Hypothesis (H₀)**
@@ -19,43 +17,24 @@ Left-footed players have **higher finishing efficiency** than right-footed playe
 
 ## **Data Description**
 
-### **Datasets Used**
+Data Description 
+Data Sources
+This project uses two external datasets which were merged and transformed:
 
-This project uses two separate datasets, combined to form one analytical dataset:
+Football Database (2014–2020)
 
+Source: Kaggle (technika148/football-database)
+
+Content Used: Detailed event-level data, including the shots.csv and players.csv files, covering the Top 5 European Leagues from 2014 to 2020. This provided the shot-level metrics (Actual Goal, xG, Shot Type).
+
+Football Players Data (SoFIFA, 2023)
+
+Source: Kaggle (maso0dahmed/football-players-data)
+
+Content Used: A large collection of FIFA player profiles used solely to extract the preferred foot (Left or Right) for each player.
 ---
-
-### **1. Football Database (2014–2020)**
-**Source:** https://www.kaggle.com/datasets/technika148/football-database  
-
-This dataset contains detailed event-level football data from the **Top 5 European leagues** between **2014 and 2020**.  
-It includes matches, players, teams, and—most importantly for this project—**shot-level data with xG values**.
-
-- **Unit of analysis:** Each row in the *shots* table represents **one individual shot** taken in a match.
-- **Key variables used:**  
-  - `shooterID`  
-  - `situation`  
-  - `shotType`  
-  - `shotResult`  
-  - `xGoal`  
-  - `gameID`  
-  - `playerID` (separate table)
-
----
-
-### **2. Football Players Data (SoFIFA, 2023)**  
-**Source:** https://www.kaggle.com/datasets/maso0dahmed/football-players-data  
-
-This dataset contains **17,000+ FIFA player profiles**, including attributes like full name, nationality, club, and—crucially—**preferred foot**.
-
-- **Unit of analysis:** Each row is **one player** with biographical and skill attributes.
-- **Key variable used:**  
-  - `full_name`  
-  - `preferred_foot`
-
-This dataset does **not** cover all players from 2014–2020, so some players from the Football Database could not be matched.
-
----
+Unit of Analysis and Observations
+The final statistical analysis of the Unit of Analysis and Observations is conducted on an aggregated dataset. Final Unit of Analysis: The Individual Player.Rationale: The hypothesis compares the average finishing efficiency score ($\text{avg\_efficiency}$) between the group of left-footed players and the group of right-footed players.Number of Observations ($N$): 2,073 unique players.Rationale: This is the final count of players who met all reliability filters.
 
 ## **Merging the Two Datasets**
 
