@@ -150,16 +150,7 @@ To quantify uncertainty, I bootstrapped the **difference in average efficiency**
 ## **Results**
 
 ### **Key Summary Statistics**
-
-After filtering the data to include only:
-- open-play shots,
-- footed shots (LeftFoot / RightFoot),
-- valid outcomes (excluding own goals and shots off the post),
-- players with ≥ 10 total shots,
-
-the final dataset included **3,234 players** with aggregated finishing metrics.
-
-Mean finishing efficiency:
+After computing player-level finishing efficiency, the average values for each footedness group were:
 
 | Footedness | Mean Efficiency |
 |-----------|-----------------|
@@ -210,19 +201,6 @@ Interpretation:
 - The interval is wide and crosses zero.
 - This means the true difference **could be slightly negative or moderately positive**.
 - The data is compatible with left-footed players having a small advantage—but not definitively.
-
----
-
-### **Visualizations**
-(Two plots were generated using Matplotlib)
-
-1. **Permutation Distribution Plot**
-   - Shows where the observed difference lies relative to the null distribution.
-   - The observed statistic is near the right tail but not extreme.
-
-2. **Bootstrap Distribution Plot**
-   - Shows the sampling variability of the estimated difference.
-   - Helps visualize uncertainty around the estimate.
 
 ---
 
