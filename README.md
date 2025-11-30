@@ -18,9 +18,8 @@ Left-footed players have **higher finishing efficiency** than right-footed playe
 
 ## **Data Description**
 
-Data Description 
 Data Sources
-This project uses two external datasets which were merged and transformed:
+This project uses two external datasets, which were merged and transformed:
 
 Football Database (2014–2020)
 
@@ -35,6 +34,7 @@ Source: Kaggle (maso0dahmed/football-players-data)
 Content Used: A large collection of FIFA player profiles used solely to extract the preferred foot (Left or Right) for each player.
 ---
 Unit of Analysis and Observations
+
 The final statistical analysis of the Unit of Analysis and Observations is conducted on an aggregated dataset. Final Unit of Analysis: The Individual Player.Rationale: The hypothesis compares the average finishing efficiency score ($\text{avg\_efficiency}$) between the group of left-footed players and the group of right-footed players.Number of Observations ($N$): 2,073 unique players.Rationale: This is the final count of players who met all reliability filters.
 
 ## **Merging the Two Datasets**
