@@ -1,6 +1,5 @@
 # **Footedness & Finishing Efficiency in Football**  
 ---
-
 ## **Research Question**
 Do left-footed players have better finishing ability than right-footed players?
 
