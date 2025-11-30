@@ -200,7 +200,7 @@ $$\textbf{(-0.0009, 0.0076)}$$
 Interpretation:
 - The interval is wide and crosses zero.
 - This means the true difference **could be slightly negative or moderately positive**.
-- The data is compatible with left-footed players having a small advantage—but not definitively.
+- The data is compatible with left-footed players having a small advantage, but not definitively.
 
 ---
 
