@@ -206,14 +206,11 @@ Interpretation:
 
 ## **Uncertainty Estimation**
 
-To understand how stable my results are, I used two resampling methods that we learned in class: a permutation test and bootstrapping.
-
 ### **Permutation Test**
 - I ran 10,000 permutations.
 - The permutation distribution was centered around 0, which makes sense if footedness does not matter.
 - The observed difference of 0.0033 was slightly toward the right side of the distribution, but not far enough to be considered unusual.
 - This means the observed advantage for left footed players is small and not very surprising if there is actually no real difference.
-
 
 ### **Bootstrap Confidence Interval**
 - I created 10,000 bootstrap samples.
