@@ -165,7 +165,7 @@ Left-footed players showed slightly higher efficiency on average.
 
 I compared groups using:
 
-$$\textbf{Test Statistic} = \text{Mean Efficiency}_{\text{Left}} - \text{Mean Efficiency}_{\text{Right}}$$
+$$\textbf{Test Statistic} = \text{Average Efficiency}_{\text{Left}} - \text{Average Efficiency}_{\text{Right}}$$
 
 **Observed difference:**  
 
