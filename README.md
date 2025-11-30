@@ -184,7 +184,7 @@ To test whether this difference could occur by chance, I performed **10,000 perm
 0.0643
 
 Interpretation:
-- A p-value of ~0.06 indicates *weak evidence* against the null hypothesis.
+- A p-value of ~0.06 indicates weak evidence against the null hypothesis.
 - The difference is suggestive, but not conventionally statistically significant at the 0.05 level.
 
 ---
