@@ -156,9 +156,6 @@ Then aggregated at the player level to compute:
 - total efficiency  
 - **average efficiency**
 
----
-
-Let me know if you want the entire README reassembled cleanly with all sections in place.
 
 ---
 
