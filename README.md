@@ -172,4 +172,74 @@ player_efficiency = df.groupby(['name', 'preferred_foot']).agg(
     avg_efficiency=('efficiency', 'mean')
 ).reset_index()
 
+## **Methods**
+
+### **Test Statistic**
+To compare finishing ability between left-footed and right-footed players, I used:
+
+\[
+\textbf{Test Statistic} = \bar{E}_{\text{Left}} - \bar{E}_{\text{Right}}
+\]
+
+where:
+
+\[
+E = \text{average finishing efficiency} = \text{mean}( \text{Goal} - \text{xG} )
+\]
+
+This measures whether left-footed players exceed their expected goals by more than right-footed players.
+
+---
+
+### **Permutation Test (Randomization Test)**
+
+To test the null hypothesis (*no difference between groups*), I simulated datasets under the assumption that footedness has no effect.
+
+**Steps:**
+
+1. Combine all players’ efficiency values into one array.
+2. Randomly shuffle (permute) the values.
+3. Split the shuffled data into two groups of the same sizes as:
+   - number of left-footed players
+   - number of right-footed players
+4. Compute the difference in means for each shuffle.
+5. Repeat **10,000 times** to build the null distribution.
+6. The p-value is the proportion of simulated differences that are greater than or equal to the observed difference.
+
+This tests whether the observed difference could arise by chance.
+
+---
+
+### **Bootstrap Confidence Intervals**
+
+To quantify uncertainty, I bootstrapped the **difference in average efficiency**:
+
+1. Resample left-footed players *with replacement*.
+2. Resample right-footed players *with replacement*.
+3. Compute the mean difference for each resample.
+4. Repeat **10,000 times**.
+5. Construct the **95% confidence interval** from the 2.5th and 97.5th percentiles of the bootstrap distribution.
+
+---
+
+### **Why the CLT Does Not Apply**
+The Central Limit Theorem does **not** apply cleanly here for two reasons:
+
+1. **Efficiency values are highly skewed.**  
+   Most shots have \( \text{goal} = 0 \), and xG values are small and non-normal.
+
+2. **Player averages vary wildly depending on shot count.**  
+   Some players take exactly 10 shots; others take over 500.  
+   This leads to **unequal variances** and **non-Gaussian sampling distributions**.
+
+Because of this:
+
+- The sampling distribution of average efficiency **is not normal**.
+- Using a bootstrap CI is more appropriate and valid.
+
+---
+
+If you'd like, I can now integrate this into your full README or polish the Results / Uncertainty sections as well.
+
+
 
