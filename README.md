@@ -112,7 +112,7 @@ This was aggregated to the player level:
 ### **Test Statistic**
 To compare finishing ability between left-footed and right-footed players, I used:
 
-$$\textbf{Test Statistic} = \text{Mean Efficiency}_{\text{Left}} - \text{Mean Efficiency}_{\text{Right}}$$
+$$\textbf{Test Statistic} = \text{Average Efficiency}_{\text{Left}} - \text{Average Efficiency}_{\text{Right}}$$
 
 
 ---
