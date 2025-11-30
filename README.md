@@ -238,8 +238,7 @@ Despite careful processing, this project has several important limitations:
 
 ### **Data Limitations**
 - The preferred-foot dataset (SoFIFA, 2023) does **not perfectly overlap** with the Football Database (2014–2020).
-- ~3,200 players were unmatched and removed from the analysis.
-- Some players’ preferred foot may have changed or may be inaccurately labeled.
+- ~3 K players were unmatched and removed from the analysis.
 ---
 
 ## **8. References**
