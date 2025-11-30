@@ -326,8 +326,6 @@ Despite careful processing, this project has several important limitations:
 - Some players’ preferred foot may have changed or may be inaccurately labeled.
 ---
 
----
-
 ## **8. References**
 
 ### **Datasets**
