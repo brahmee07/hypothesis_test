@@ -219,6 +219,140 @@ To quantify uncertainty, I bootstrapped the **difference in average efficiency**
 3. Compute the mean difference for each resample.
 4. Repeat **10,000 times**.
 5. Construct the **95% confidence interval** from the 2.5th and 97.5th percentiles of the bootstrap distribution.
+---
 
+## **Results**
+
+### **Key Summary Statistics**
+
+After filtering the data to include only:
+- open-play shots,
+- footed shots (LeftFoot / RightFoot),
+- valid outcomes (excluding own goals and shots off the post),
+- players with ≥ 10 total shots,
+
+the final dataset included **3,234 players** with aggregated finishing metrics.
+
+Mean finishing efficiency:
+
+| Footedness | Mean Efficiency |
+|-----------|-----------------|
+| **Left-footed** | -0.0008 |
+| **Right-footed** | -0.0041 |
+
+Left-footed players showed slightly higher efficiency on average.
+
+---
+
+### **Observed Test Statistic**
+
+I compared groups using:
+
+\[
+\text{Difference} = \bar{E}_{\text{Left}} - \bar{E}_{\text{Right}}
+\]
+
+**Observed difference:**  
+\[
+\textbf{0.0033}
+\]
+
+This means that left-footed players overperformed xG by about **0.33 percentage points more** than right-footed players.
+
+---
+
+### **Permutation Test**
+
+To test whether this difference could occur by chance, I performed **10,000 permutations** under the null hypothesis.
+
+**P-value:**  
+\[
+\textbf{0.0643}
+\]
+
+Interpretation:
+- A p-value of ~0.06 indicates *weak evidence* against the null hypothesis.
+- The difference is suggestive, but not conventionally statistically significant at the 0.05 level.
+
+---
+
+### **Bootstrap Confidence Interval**
+
+Using **10,000 bootstrap resamples**, I estimated uncertainty around the difference in finishing efficiency.
+
+**95% Bootstrap Confidence Interval:**  
+\[
+\textbf{(-0.0009,\ 0.0076)}
+\]
+
+Interpretation:
+- The interval is wide and crosses zero.
+- This means the true difference **could be slightly negative or moderately positive**.
+- The data is compatible with left-footed players having a small advantage—but not definitively.
+
+---
+
+### **Visualizations**
+(Two plots were generated using Matplotlib)
+
+1. **Permutation Distribution Plot**
+   - Shows where the observed difference lies relative to the null distribution.
+   - The observed statistic is near the right tail but not extreme.
+
+2. **Bootstrap Distribution Plot**
+   - Shows the sampling variability of the estimated difference.
+   - Helps visualize uncertainty around the estimate.
+
+---
+
+## **Uncertainty Estimation**
+
+To quantify uncertainty in my results, I used **resampling-based methods** from class: permutation tests and bootstrapping.
+
+### **Permutation Test**  
+- **Number of permutations:** 10,000  
+- The permutation distribution was centered around **0**, as expected under the null hypothesis that footedness does not matter.
+- The observed difference (0.0033) was located slightly in the right tail of this distribution, but not far enough to be considered rare.
+- This reinforces that the observed difference is small and only marginally surprising under the null model.
+
+### **Bootstrap Confidence Interval**
+- **Number of bootstrap samples:** 10,000  
+- The bootstrap distribution of the mean difference between left-footed and right-footed players was roughly symmetrical but showed noticeable spread.
+- The **95% bootstrap confidence interval** was:
+  
+  \[
+  (-0.0009,\ 0.0076)
+  \]
+
+### **Interpretation**
+- Because the interval includes **0**, we cannot confidently conclude that left-footed players are strictly better finishers.
+- However, the interval leans slightly positive, meaning **the data is consistent with a small left-foot advantage**, even if the evidence is not statistically strong.
+- Importantly, bootstrapping does not rely on the Central Limit Theorem—especially useful here because:
+  - efficiency values are not normally distributed,
+  - Some players have very few shots,
+  - Efficiency includes extreme outliers (big xG overperformance or underperformance).
+
+Bootstrapping gives a robust sense of uncertainty when theoretical approximations fail.
+
+---
+##  **Limitations**
+
+Despite careful processing, this project has several important limitations:
+
+### **Data Limitations**
+- The preferred-foot dataset (SoFIFA, 2023) does **not perfectly overlap** with the Football Database (2014–2020).
+- ~3,200 players were unmatched and removed from the analysis.
+- Some players’ preferred foot may have changed or may be inaccurately labeled.
+---
+
+---
+
+## **8. References**
+
+### **Datasets**
+- **Football Database (2014–2020)**  
+  Kaggle: https://www.kaggle.com/datasets/technika148/football-database  
+- **Football Players Data (SoFIFA)**  
+  Kaggle: https://www.kaggle.com/datasets/maso0dahmed/football-players-data
 
 
