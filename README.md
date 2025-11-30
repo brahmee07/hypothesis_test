@@ -18,128 +18,111 @@ Left-footed players have **higher finishing efficiency** than right-footed playe
 
 ---
 
-## **3. Data Description**
+## **Data Description**
 
 ### **Datasets Used**
 
-#### **1. Football Database (Kaggle, 2014–2020)**
-A relational dataset covering the top 5 European leagues.  
-Includes:
-- Shot-level data  
-- Expected goals (xG)  
-- Shot type (RightFoot, LeftFoot, Head, etc.)  
-- Shot situation (OpenPlay, SetPiece, Corner, etc.)  
-- Player IDs  
-- ~1800 matches per season  
-
-**Unit of analysis:** individual shots.
+This project uses two separate datasets, combined to form one analytical dataset:
 
 ---
 
-#### **2. Football Players Data (SoFIFA, 2023)**
-17,000+ players scraped from SoFIFA.com.  
-Includes:
-- Full names  
-- Preferred foot  
-- Weak-foot rating  
-- Club/nationality  
-- Positions & ratings  
+### **1. Football Database (2014–2020)**
+**Source:** https://www.kaggle.com/datasets/technika148/football-database  
 
-**Reason for this dataset:**  
-The Football Database *does not* include preferred foot, so this dataset fills that gap.
+This dataset contains detailed event-level football data from the **Top 5 European leagues** between **2014 and 2020**.  
+It includes matches, players, teams, and—most importantly for this project—**shot-level data with xG values**.
 
-**Limitation:**  
-Some older players (2014–2020) do not appear in FIFA 2023 → unmatched players removed.
-
----
-
-## **🔧 Data Preparation Note**
-
-All data cleaning, merging, and player–footedness matching were completed in a
-separate preprocessing notebook, which is **not included in this repository**
-to keep the project clean and focused on the statistical analysis.
-
-The preprocessing steps included:
-- Loading the Football Database (2014–2020) shot-level data  
-- Loading the FIFA Player dataset (preferred foot)
-- Cleaning and normalizing player names (lowercasing, removing accents)
-- Applying exact match → substring match → fuzzy string matching
-- Removing unmatched or ambiguous players
-- Selecting only relevant shot information (Open Play, LeftFoot/RightFoot)
-- Constructing the final analysis dataset: `player_shot.csv`
-
-The final cleaned dataset is provided directly in this repository so that the
-results can be fully reproduced **without requiring the preprocessing code**.
+- **Unit of analysis:** Each row in the *shots* table represents **one individual shot** taken in a match.
+- **Key variables used:**  
+  - `shooterID`  
+  - `situation`  
+  - `shotType`  
+  - `shotResult`  
+  - `xGoal`  
+  - `gameID`  
+  - `playerID` (separate table)
 
 ---
 
-## **4. Methods**
+### **2. Football Players Data (SoFIFA, 2023)**  
+**Source:** https://www.kaggle.com/datasets/maso0dahmed/football-players-data  
 
-### **Shot-Level Efficiency**
-\[
-\text{efficiency} = \text{Goal} - \text{xG}
-\]
+This dataset contains **17,000+ FIFA player profiles**, including attributes like full name, nationality, club, and—crucially—**preferred foot**.
 
-- Positive → finished better than expected  
-- Negative → underperformed xG  
+- **Unit of analysis:** Each row is **one player** with biographical and skill attributes.
+- **Key variable used:**  
+  - `full_name`  
+  - `preferred_foot`
 
-### **Player-Level Aggregation**
-For each player:
-- total shots  
-- total goals  
-- total xG  
-- total efficiency  
-- average efficiency  
+This dataset does **not** cover all players from 2014–2020, so some players from the Football Database could not be matched.
 
 ---
 
-## **5. Data Filtering**
+## **Merging the Two Datasets**
 
-To isolate true finishing ability:
+The Football Database does not include preferred foot, so I performed the following steps:
 
-### ✔ Open-play shots only  
-(set pieces and penalties removed)
+### **Name Cleaning**
+- Lowercased all names  
+- Removed accents using `unidecode`  
+- Removed punctuation  
+- Created “clean” name columns
 
-### ✔ Footed shots only  
-- LeftFoot  
-- RightFoot  
-(headers and other body parts removed)
+### **Matching Logic**
+Used a three-stage matching pipeline:
+1. **Exact match**  
+2. **Substring match**  
+3. **Fuzzy match** (fuzzywuzzy, token_sort_ratio)
 
-### ✔ Valid outcomes only  
-Removed:
-- OwnGoal  
-- ShotOnPost  
-
-### ✔ Minimum sample size  
-Only players with **10+ shots** included.
+Players not matched in any step (~3,200 players) were dropped because their preferred foot was unavailable.
 
 ---
 
-## **6. Test Statistic (Plain Language)**
+## **Final Shot-Level Dataset**
 
-To compare finishing ability between groups, I used:
+After merging and cleaning:
 
-> **Difference in average finishing efficiency  
-(left-footed mean − right-footed mean)**
+### **Unit of analysis:**  
+Each row represents **one footed shot** by a player, with preferred foot attached.
 
-If positive → left-footers finish better.  
-If negative → right-footers finish better.  
-If near zero → no real difference.
-
-This is the statistic used in the permutation test.
+### **Variables:**
+| Variable | Description |
+|---------|-------------|
+| `name` | Player name |
+| `preferred_foot` | Left or Right |
+| `situation` | Shot situation (OpenPlay, SetPiece, DirectFreekick, etc.) |
+| `shotType` | LeftFoot / RightFoot (others removed) |
+| `shotResult` | Goal, SavedShot, BlockedShot, MissedShots |
+| `xGoal` | Expected goal value of the shot |
 
 ---
 
-## **7. Permutation Test**
+## **Filtering Steps**
 
-### **Observed Difference**
-Using ~750 matched players:
+To ensure fairness and reduce noise:
+
+- **Kept only footed shots:**  
+  - `LeftFoot`, `RightFoot`
+- **Kept only open-play shots:**  
+  - `df = df[df['situation'] == 'OpenPlay']`
+- **Removed outcomes not relevant to finishing:**  
+  - Dropped `OwnGoal` and `ShotOnPost`
+- **Computed shot-level efficiency:**  
+  - `efficiency = goal - xGoal`
+
+---
+
+## **Player-Level Dataset (Aggregated)**
+
+To analyze finishing ability, I aggregated the shot-level data:
+
+```python
+player_efficiency = df.groupby(['name', 'preferred_foot']).agg(
+    total_shots=('goal', 'count'),
+    total_goals=('goal', 'sum'),
+    total_xg=('xGoal', 'sum'),
+    total_efficiency=('efficiency', 'sum'),
+    avg_efficiency=('efficiency', 'mean')
+).reset_index()
 
 
-### **Permutation Procedure**
-- Combine both groups  
-- Shuffle player labels 10,000 times  
-- Recompute the difference each time  
-- p-value = proportion of shuffled diffs ≥ observed diff  
-
-### **Permutation Result**
