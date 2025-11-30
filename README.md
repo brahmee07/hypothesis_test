@@ -239,9 +239,8 @@ I compared groups using:
 $$\textbf{Test Statistic} = \text{Mean Efficiency}_{\text{Left}} - \text{Mean Efficiency}_{\text{Right}}$$
 
 **Observed difference:**  
-\[
-\textbf{0.0033}
-\]
+
+0.0033
 
 This means that left-footed players overperformed xG by about **0.33 percentage points more** than right-footed players.
 
@@ -252,9 +251,8 @@ This means that left-footed players overperformed xG by about **0.33 percentage 
 To test whether this difference could occur by chance, I performed **10,000 permutations** under the null hypothesis.
 
 **P-value:**  
-\[
-\textbf{0.0643}
-\]
+
+0.0643
 
 Interpretation:
 - A p-value of ~0.06 indicates *weak evidence* against the null hypothesis.
