@@ -220,26 +220,5 @@ To quantify uncertainty, I bootstrapped the **difference in average efficiency**
 4. Repeat **10,000 times**.
 5. Construct the **95% confidence interval** from the 2.5th and 97.5th percentiles of the bootstrap distribution.
 
----
-
-### **Why the CLT Does Not Apply**
-The Central Limit Theorem does **not** apply cleanly here for two reasons:
-
-1. **Efficiency values are highly skewed.**  
-   Most shots have \( \text{goal} = 0 \), and xG values are small and non-normal.
-
-2. **Player averages vary wildly depending on shot count.**  
-   Some players take exactly 10 shots; others take over 500.  
-   This leads to **unequal variances** and **non-Gaussian sampling distributions**.
-
-Because of this:
-
-- The sampling distribution of average efficiency **is not normal**.
-- Using a bootstrap CI is more appropriate and valid.
-
----
-
-If you'd like, I can now integrate this into your full README or polish the Results / Uncertainty sections as well.
-
 
 
