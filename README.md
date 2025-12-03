@@ -10,10 +10,10 @@ There has always been debate about whether left-footed players have a natural ad
 ## **Hypothesis**
 
 ### **Null Hypothesis (H₀)**
-There is **no difference** in finishing efficiency between left-footed and right-footed players.
+There is no difference in finishing efficiency between left-footed and right-footed players.
 
 ### **Alternative Hypothesis (H₁)**
-Left-footed players have **higher finishing efficiency** than right-footed players.
+Left-footed players have higher finishing efficiency than right-footed players.
 
 ---
 
@@ -84,7 +84,7 @@ To ensure a fair comparison of finishing ability, the following filters were app
 ---
 
 ### 3. Minimum Sample Size Requirement
-- Only players with **10 or more** qualifying shots were retained.
+- Only players with 10 or more qualifying shots were retained.
 - This reduced the dataset from 3,234 players to 2,073 players.
 
 ---
@@ -129,7 +129,7 @@ To test the null hypothesis (*no difference between groups*), I simulated datase
    - number of left-footed players
    - number of right-footed players
 4. Compute the difference in means for each shuffle.
-5. Repeat **10,000 times** to build the null distribution.
+5. Repeat 10,000 times to build the null distribution.
 6. The p-value is the proportion of simulated differences that are greater than or equal to the observed difference.
 
 This tests whether the observed difference could arise by chance.
@@ -140,10 +140,10 @@ This tests whether the observed difference could arise by chance.
 
 To quantify uncertainty, I bootstrapped the **difference in average efficiency**:
 
-1. Resample left-footed players *with replacement*.
-2. Resample right-footed players *with replacement*.
+1. Resample left-footed players with replacement.
+2. Resample right-footed players with replacement.
 3. Compute the mean difference for each resample.
-4. Repeat **10,000 times**.
+4. Repeat 10,000 times.
 5. Construct the **95% confidence interval** from the 2.5th and 97.5th percentiles of the bootstrap distribution.
 ---
 
@@ -154,8 +154,8 @@ After computing player-level finishing efficiency, the average values for each f
 
 | Footedness | Mean Efficiency |
 |-----------|-----------------|
-| **Left-footed** | -0.0008 |
-| **Right-footed** | -0.0041 |
+| Left-footed | -0.0008 |
+| Right-footed | -0.0041 |
 
 Left-footed players showed slightly higher efficiency on average.
 
@@ -177,7 +177,7 @@ This means that left-footed players overperformed xG by about **0.33 percentage 
 
 ### **Permutation Test**
 
-To test whether this difference could occur by chance, I performed **10,000 permutations** under the null hypothesis.
+To test whether this difference could occur by chance, I performed 10,000 permutations under the null hypothesis.
 
 **P-value:**  
 
@@ -191,7 +191,7 @@ Interpretation:
 
 ### **Bootstrap Confidence Interval**
 
-Using **10,000 bootstrap resamples**, I estimated uncertainty around the difference in finishing efficiency.
+Using 10,000 bootstrap resamples, I estimated uncertainty around the difference in finishing efficiency.
 
 **95% Bootstrap Confidence Interval:**  
 
