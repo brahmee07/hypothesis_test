@@ -230,10 +230,31 @@ Interpretation:
 Bootstrapping gives a more reliable picture of uncertainty in situations like this where normal theory does not work well.
 
 ---
-##  **Limitations**
+To further support the main hypothesis, I examined how players perform with their strong foot (the foot they prefer) versus their weak foot.
 
-### **Data Limitations**
-- The preferred-foot dataset (SoFIFA, 2023) does **not perfectly overlap** with the Football Database (2014–2020).
+Overall Averages Across All Players
+Metric	Strong Foot	Weak Foot
+Average Efficiency	–0.0011	–0.0172
+
+Weak-foot finishing is clearly less efficient across the entire player population.
+
+Comparing Left-Footed vs Right-Footed Players (Strong Foot Only)
+Group	Avg Strong-Foot Efficiency
+Left-footed players	+0.00021
+Right-footed players	–0.00154
+
+Left-footed players finish slightly better with their strong foot.
+
+Comparing Left-Footed vs Right-Footed Players (Weak Foot Only)
+Group	Avg Weak-Foot Efficiency
+Left-footed players	–0.01280
+Right-footed players	–0.01871
+
+Left-footed players also finish slightly better with their weak foot.
+
+---
+##  **Limitations**
+- The preferred-foot dataset (SoFIFA, 2023) does not perfectly overlap with the Football Database (2014–2020).
 - ~3 K players were unmatched and removed from the analysis.
 ---
 
