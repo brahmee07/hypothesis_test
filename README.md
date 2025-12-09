@@ -242,16 +242,18 @@ To further support the main hypothesis, I examined how players perform with thei
 
 Weak-foot finishing is clearly less efficient across the entire player population.
 
-Group	Avg Weak-Foot Efficiency	Interpretation
-Left-footed players	–0.01280	They underperform xG by 1.28% relative to expectation with their weak foot.
-Right-footed players	–0.01871	They underperform xG by 1.87% relative to expectation with their weak foot.
+| Group                 | Avg Weak-Foot Efficiency |
+| :-------------------- | :-----------------------: |
+| **Left-footed players**  | **–0.01280** |
+| **Right-footed players** | **–0.01871** |
 
 Left-footed players finish slightly better with their strong foot.
 
-Comparing Left-Footed vs Right-Footed Players (Weak Foot Only)
-Group	Avg Weak-Foot Efficiency
-Left-footed players	–0.01280
-Right-footed players	–0.01871
+ | Group                 | Avg Weak-Foot Efficiency |
+| :-------------------- | :-----------------------: |
+| **Left-footed players**  | **–0.01280** |
+| **Right-footed players** | **–0.01871** |
+
 
 Left-footed players also finish slightly better with their weak foot.
 
