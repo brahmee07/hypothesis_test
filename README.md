@@ -236,16 +236,15 @@ Bootstrapping gives a more reliable picture of uncertainty in situations like th
 ---
 To further support the main hypothesis, I examined how players perform with their strong foot (the foot they prefer) versus their weak foot.
 
-Overall Averages Across All Players
-Metric	Strong Foot	Weak Foot
-Average Efficiency	–0.0011	–0.0172
+| Metric | Strong Foot (Avg. Efficiency) | Weak Foot (Avg. Efficiency) |
+| :--- | :---: | :---: |
+| **Average Finishing Efficiency** | **–0.0011** | **–0.0172** |
 
 Weak-foot finishing is clearly less efficient across the entire player population.
 
-Comparing Left-Footed vs Right-Footed Players (Strong Foot Only)
-Group	Avg Strong-Foot Efficiency
-Left-footed players	+0.00021
-Right-footed players	–0.00154
+Group	Avg Weak-Foot Efficiency	Interpretation
+Left-footed players	–0.01280	They underperform xG by 1.28% relative to expectation with their weak foot.
+Right-footed players	–0.01871	They underperform xG by 1.87% relative to expectation with their weak foot.
 
 Left-footed players finish slightly better with their strong foot.
 
