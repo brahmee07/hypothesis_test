@@ -260,6 +260,7 @@ Left-footed players also finish slightly better with their weak foot.
 ##  **Limitations**
 - The preferred-foot dataset (SoFIFA, 2023) does not perfectly overlap with the Football Database (2014–2020).
 - ~3 K players were unmatched and removed from the analysis.
+- Results represent 2014–2020 only
 ---
 
 ## **References**
