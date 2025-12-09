@@ -236,26 +236,27 @@ Bootstrapping gives a more reliable picture of uncertainty in situations like th
 ---
 To further support the main hypothesis, I examined how players perform with their strong foot (the foot they prefer) versus their weak foot.
 
-| Metric | Strong Foot (Avg. Efficiency) | Weak Foot (Avg. Efficiency) |
-| :--- | :---: | :---: |
-| **Average Finishing Efficiency** | **–0.0011** | **–0.0172** |
+Overall Strong-Foot vs Weak-Foot Efficiency
+Foot Type	Avg. Finishing Efficiency
+Strong Foot	–0.0011
+Weak Foot	–0.0172
 
-Weak-foot finishing is clearly less efficient across the entire player population.
+Players are significantly less efficient when shooting with their weak foot. This confirms that the dataset behaves in a realistic football sense and provides a useful baseline for comparing left- vs right-footed players.
 
-| Group                 | Avg Weak-Foot Efficiency |
-| :-------------------- | :-----------------------: |
-| **Left-footed players**  | **–0.01280** |
-| **Right-footed players** | **–0.01871** |
+Strong-Foot Comparison (Left-Footed vs Right-Footed Players)
+Group	Avg Strong-Foot Efficiency
+Left-footed players	+0.00021
+Right-footed players	–0.00154
 
-Left-footed players finish slightly better with their strong foot.
+Left-footed players finish slightly better with their dominant foot than right-footed players.
+The difference is small but consistent with the idea that left-footers may be more clinical.
 
- | Group                 | Avg Weak-Foot Efficiency |
-| :-------------------- | :-----------------------: |
-| **Left-footed players**  | **–0.01280** |
-| **Right-footed players** | **–0.01871** |
+Weak-Foot Comparison (Left-Footed vs Right-Footed Players)
+Group	Avg Weak-Foot Efficiency
+Left-footed players	–0.01280
+Right-footed players	–0.01871
 
-
-Left-footed players also finish slightly better with their weak foot.
+Both groups perform worse with their weaker foot, but left-footed players still perform slightly better than right-footed players even on their weak side.
 
 ---
 ##  **Limitations**
