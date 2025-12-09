@@ -237,24 +237,29 @@ Bootstrapping gives a more reliable picture of uncertainty in situations like th
 To further support the main hypothesis, I examined how players perform with their strong foot (the foot they prefer) versus their weak foot.
 
 Overall Strong-Foot vs Weak-Foot Efficiency
-Foot Type	Avg. Finishing Efficiency
-Strong Foot	–0.0011
-Weak Foot	–0.0172
+| Foot Type     | Avg. Finishing Efficiency |
+|---------------|---------------------------|
+| Strong Foot   | -0.0011                   |
+| Weak Foot     | -0.0172                   |
 
 Players are significantly less efficient when shooting with their weak foot. This confirms that the dataset behaves in a realistic football sense and provides a useful baseline for comparing left- vs right-footed players.
 
 Strong-Foot Comparison (Left-Footed vs Right-Footed Players)
-Group	Avg Strong-Foot Efficiency
-Left-footed players	+0.00021
-Right-footed players	–0.00154
+| Group                 | Avg Strong-Foot Efficiency |
+|-----------------------|-----------------------------|
+| Left-footed players   | 0.00021                     |
+| Right-footed players  | -0.00154                    |
+
 
 Left-footed players finish slightly better with their dominant foot than right-footed players.
 The difference is small but consistent with the idea that left-footers may be more clinical.
 
 Weak-Foot Comparison (Left-Footed vs Right-Footed Players)
-Group	Avg Weak-Foot Efficiency
-Left-footed players	–0.01280
-Right-footed players	–0.01871
+
+| Group                 | Avg Weak-Foot Efficiency |
+|-----------------------|---------------------------|
+| Left-footed players   | -0.01280                  |
+| Right-footed players  | -0.01871                  |
 
 Both groups perform worse with their weaker foot, but left-footed players still perform slightly better than right-footed players even on their weak side.
 
