@@ -36,7 +36,11 @@ Used for:
 - `full_name`
 - `preferred_foot`
 
-This dataset provides preferred-foot information that the Football Database does not include.
+Shot data (how each shot was taken and its xG value) comes entirely from the Football Database.
+
+Preferred-foot data comes from the SoFIFA dataset.
+
+These two sources were merged using name-matching techniques to attach the preferred foot to each shot event.
 
 ---
 
